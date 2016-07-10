@@ -1,9 +1,35 @@
-body{
-    margin-left: 200px;
-    margin-right: 200px;
+body {
+    
     background-image: url("http://www.housingtrustsv.org/wp-content/uploads/2014/12/background4.jpg");
     background-size: cover;
 }
+
+.content {
+    margin-left: 200px;
+    margin-right: 200px;
+    
+}
+
+
+.footer-container{
+     width:100%;
+     margin: 0px;
+     background-color: white;
+     position: fixed;
+}
+
+footer #fix-this .site-footer {
+    position: fixed;
+}
+
+.footer-left{
+    margin-left: 20px;
+}
+
+.footer-right{
+    margin-left: 780px;
+}
+
 
 .navbar-default {
     min-height: 40px;
