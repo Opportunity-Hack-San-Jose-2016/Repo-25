@@ -24,7 +24,7 @@
 </head>
 
 <body>
-
+    <div class="content">
     <img src="{{url_for('static', filename='images/housing-trust-logo.png') }}"></img>
 
     <nav class="navbar navbar-default background-gray">
@@ -53,73 +53,73 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse1">Step 1</a>
+          <a data-toggle="collapse" href="#collapse1">Step 1. Review Program Requirements and Register for the General Interest List</a>
         </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
                     <form>
                         <!-- Mithil #1 -->
-                        <div class="form-group">
+                        <div id="homebuyer" class="form-group">
                             <label for="homebuyer">Are you a first time homebuyer as described by the City of Santa Clara BMP program guidelines?</label><br>
-                            <input type="radio" name="homebuyer" value="Yes"> Yes<br>
-                            <input type="radio" name="homebuyer" value="No"> No<br>
+                            <input type="radio" name="homebuyer" value="Yes" onclick=homebuyerYes()> Yes<br>
+                            <input type="radio" name="homebuyer" value="No" onclick=homebuyerNo()> No<br>
                         </div>
                         <!-- Rahul #1.5 -->
-                        <div class="form-group">
+                        <div id="number-household" class="form-group">
                             <label for="number_household">Number of people in your household?</label><br>
-                            <select name="number_household">
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                    <option value=5>5</option>
-                    <option value=6>6</option>
-                    <option value=7>7</option>
-                    <option value=8>8</option>
-                    <option value=9>9</option>
-                    <option value=10>10</option>
-                    <option value=11>11</option>
-                </select>
+                            <select name="number_household" onchange="getMemberCount(this.value)">
+                                <option class="test" id="default-number-household" value=0>--Select--</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                                <option value=6>6+</option>
+                            </select>
                         </div>
                         <!-- Mithil #2 -->
-                        <div class="form-group">
-                            What is your gross household income?<br> $
-                            <input type="number" min="0" max="1000000" name="householdincome" />
+                        <div id="household-income" class="form-group">
+                            <label for="household_income">Is your gross household income greater than <span id="limit-income"></span>?</label><br>
+                            <input type="radio" name=household_income value="Yes" onclick=householdIncomeYes()> Yes<br>
+                            <input type="radio" name=household_income value="No" onclick=householdIncomeNo()> No<br>
                         </div>
                         <!-- Rahul #3 -->
-                        <div class="form-group">
+                        <div id="first-mortgage" class="form-group">
                             <label for="first_mortgage">Do you qualify for first mortgage with a thirty-year, fixed-rate conventional loan?</label><br>
-                            <input type="radio" name="first_mortgage" value="Yes"> Yes<br>
-                            <input type="radio" name="first_mortgage" value="No"> No<br>
+                            <input type="radio" name="first_mortgage" value="Yes" onclick=firstMortgageYes()> Yes<br>
+                            <input type="radio" name="first_mortgage" value="No" onclick=firstMortgageNo()> No<br>
                         </div>
                         <!-- Mithil #4 -->
-                        <div class="form-group">
+                        <div id="FICO-score" class="form-group">
                             <label for="FICO"> Is your FICO score greater than or equal to 640?</label><br>
-                            <input type="radio" name="FICO" value="Yes"> Yes<br>
-                            <input type="radio" name="FICO" value="No"> No<br>
+                            <input type="radio" name="FICO" value="Yes" onclick=ficoScoreYes()> Yes<br>
+                            <input type="radio" name="FICO" onclick=ficoScoreNo()> No<br>
                         </div>
                         <!-- Rahul #5 -->
-                        <div class="form-group">
+                        <div id="short-sale" class="form-group">
                             <label for="short_sale">Did you have any short sales or bankruptcy within the last 4 years?</label><br>
-                            <input type="radio" name="short_sale" value="Yes"> Yes<br>
-                            <input type="radio" name="short_sale" value="No"> No<br>
+                            <input type="radio" name="short_sale" value="Yes" onclick=shortSaleYes()> Yes<br>
+                            <input type="radio" name="short_sale" value="No" onclick=shortSaleNo()> No<br>
                         </div>
                         <!-- Mithil #6 -->
-                        <div class="form-group">
+                        <div id="forclosure" class="form-group">
                             <label for="forclosure">Did you have any forclosures within the last 7 years?</label><br>
-                            <input type="radio" name="FICO" value="Yes"> Yes<br>
-                            <input type="radio" name="FICO" value="No"> No<br>
+                            <input type="radio" name="forclosure" value="Yes" onclick=forclosureYes()> Yes<br>
+                            <input type="radio" name="forclosure" value="No" onclick=forclosureNo()> No<br>
                         </div>
                         <!-- Rahul #7 -->
-                        <div class="form-group">
+                        <div id="financial-assets" class="form-group">
                             <label for="financial_assets">Do you have $100,000 or more in financial assets?</label><br>
-                            <input type="radio" name="financial_assets" value="Yes"> Yes<br>
-                            <input type="radio" name="financial_assets" value="No"> No<br>
+                            <input type="radio" name="financial_assets" value="Yes" onclick=financialAssestsYes()> Yes<br>
+                            <input type="radio" name="financial_assets" value="No" onclick=financialAssestsNo()> No<br>
                         </div>
-                        <!-- Rahul #8 inspired by Mithil-->
-                        <div class="form-group">
-                            <a href="http://www.housingtrustsv.org/wp-content/uploads/2015/09/Occupancy-Guidelines.pdf"> Please review Occupancy Standards here.</a>
+                        <!-- Rahul #8 inspired by his team-->
+                        <div id="not-eligible" class="form-group alert alert-danger">
+                            Sorry, you are not eligible for the purchase program.
+                        </div>
+                        <div id="eligible" class="form-group alert alert-success">
+                            Congratulations! You are eligible for the purchase program. <a href="http://www.housingtrustsv.org/wp-content/uploads/2015/09/Occupancy-Guidelines.pdf"> Please review Occupancy Standards here.</a>
                         </div>
                     </form>
                 </div>
@@ -127,12 +127,12 @@
             </div>
             <div class="panel-heading">
                 <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse2">Step 2</a>
+          <a data-toggle="collapse" href="#collapse2">Step 2. Complete a BMP Program Prequalification Intake and Review the Eligibility Application</a>
         </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <form id ="step2form" action="/submitInfo" method="post">
+                    <form id="step2form" action="/submitInfo" method="post">
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name(s)</label>
@@ -161,27 +161,27 @@
 
 
                         <p><strong>Best way to contact:</strong></p>
-                        
+
                         <div class="radio-inline">
-                           <label>
+                            <label>
                                <input type="radio" value="home" name="contact"> Home
                            </label>
-                       </div>
-                       <div class="radio-inline">
-                           <label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
                                <input type="radio" value="phone" name="contact"> Cell Phone
                            </label>
-                       </div>
-                       <div class="radio-inline">
-                           <label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
                                <input type="radio" value= "email1" name="contact"> Email 1
                            </label>
-                       </div>
-                       <div class="radio-inline">
+                        </div>
+                        <div class="radio-inline">
                             <label>
                                <input type="radio" value="email2" name="contact"> Email 2 
-                            </label> 
-                       </div>
+                            </label>
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1"><strong>1. City that you live in:</strong></label>
                             <input type="text" class="form-control" id="exampleInputPassword1" name="live">
@@ -344,57 +344,161 @@
             </div>
             <div class="panel-heading">
                 <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse3">Step 3</a>
+          <a data-toggle="collapse" href="#collapse3">Step 3. Attend a Below Market Purchase (BMP) Program Orientation and Application Workshop</a>
         </h4>
             </div>
             <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">Panel Body</div>
+                <div class="panel-body">
+                    <p>Applicants must attend the Orientation and Application workshop for the City of Santa Clara BMP Program. The workshop will:</p>
+                    <ul>
+                        <li>Provide a description of the BMP program</li>
+                        <li>Discuss the eligibility requirements</li>
+                        <li>Review the Eligibility Application and the steps to apply for the program</li>
+                    </ul>
+                    <p>You and any co-applicants/co-borrowers (who will be either on the loan or on title, including non-borrowing spouses) are required to attend this workshop prior to eligibility determination.</p>
+                    <p>You can find the next wokshop scheduled on the <a href="http://www.housingtrustsv.org/homebuyer-calendar/">Homebuyer Calender</a>as City of Santa Clara Below Market Purchase Program-Orientation and Application Workshop</p>
+                </div>
 
             </div>
             <div class="panel-heading">
                 <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse4">Step 4</a>
+          <a data-toggle="collapse" href="#collapse4">Step 4. Sign up for a Homebuyer Education Class</a>
         </h4>
             </div>
             <div id="collapse4" class="panel-collapse collapse">
-                <div class="panel-body">Panel Body</div>
+                <div class="panel-body">
+                    <p>
+                        Applicants are required to attend a HUD-approved 8 Hour Homebuyer Education Class. This class helps homebuyers understand the steps to homeownership.<br><br> You can find the next workshop scheduled on the Homebuyer Calendar as
+                        City of Santa Clara Below Market Purchase Program-Orientation and Application Workshop.<br><br> You and any co-appliants/co-borrowers (who will be either on the loan or on the title, including non-borrowing spouses) are required
+                        to attend this class prior to eligibility determination.
+                    </p>
+                </div>
 
             </div>
             <div class="panel-heading">
                 <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse5">Step 5</a>
+          <a data-toggle="collapse" href="#collapse5">Step 5. Determine if Your Household is Eligible and Your Next Steps</a>
         </h4>
             </div>
             <div id="collapse5" class="panel-collapse collapse">
-                <div class="panel-body">Panel Body</div>
+                <div class="panel-body">
+                    <p>Before submitting an application:</p>
+                    <ol type="I">
+                        <li>Contact BMP Administrator at the Housing Trust to discuss getting a prequalification or preapproval from a lender on our <a href="http://www.housingtrustsv.org/wp-content/uploads/2015/09/Approved-Lenders-and-Loan-Officers-rev-160429.pdf">approved BMP lender list</a>.</li>
+                        <li>Preview the developments and their available units.</li>
+                        <li>For a list of homes at Central Park, <a href="http://www.housingtrustsv.org/wp-content/uploads/2015/09/Homes-at-Central-Park-BMP-Schedule-160701.pdf">click here</a>.</li>
+                        <li>For a list of the homes at Alexis Condominiums, <a href="http://www.housingtrustsv.org/wp-content/uploads/2015/09/ALEXIS-BMP-Schedule-160701.pdf">click here</a>.</li>
+                    </ol>
+                    <p>For Alexis Condominiums by Silicon Sage – Application deadline has been extended to July 1, 2016- by appointment only.</p>
+
+
+                    <p>For the Homes at Central Park by D.R. Horton – Eligibility Applications are accepted on a first-come, first serve basis only. You must make an appointment to deliver the Eligibility Application with all required documents on the checklist.</p>
+                </div>
 
             </div>
             <div class="panel-heading">
                 <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse6">Step 6</a>
+          <a data-toggle="collapse" href="#collapse6">Step 6. Complete BMP Eligibility Application and Set an Appointment</a>
         </h4>
             </div>
             <div id="collapse6" class="panel-collapse collapse">
-                <div class="panel-body">Panel Body</div>
+                <div class="panel-body">
+                    <p>To complete the BMP Eligibility Application you must set an appointment with the Homeownership Program department.</p>
+
+                    <p>Additional required documents</p>
+
+                    <p><a href="http://www.housingtrustsv.org/wp-content/uploads/2015/09/Form-4506-T-Rev-9-20151.pdf">Form 4506T</a></p>
+                    <p><a href="http://www.housingtrustsv.org/wp-content/uploads/2015/09/Form-W-9-Rev-12-2014-Fillable.pdf">Form W-9</a></p>
+
+                    <p>Once you have been notified by Housing Trust Silicon Valley of program pre-eligibility for the BMP Program, you must obtain a pre-approval (only if a prequalification was submitted) from the BMP approved lender within 7 calendar days.
+                        Your pre-approval letter from the BMP Lender and credit report will be required to finalize program eligibility.</p>
+
+
+                    <p>After determination of program eligibility, the priority level criteria will be applied and you will be notified of your ranking and property availability.</p>
+                </div>
 
             </div>
         </div>
 
+        <h3>Other Important Information</h3>
+        <p>
+
+            The BMP home buyer will sign to a 20-year Promissory Note for the difference of the home’s appraised unrestricted Initial Market Value (IMV) and the restricted Affordable Sales Price (ASP) when the BMP home is initially sold. The Promissory Note is secured
+            by a Deed of Trust and Security Agreement which creates a lien on the home. The approved BMP homebuyer will also execute the Below Market Purchase Covenants, Restrictions and Option to Purchase document. This document enforces the following
+            resale restrictions to ensure the property remains affordable.
+
+        </p>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#oii1">Year 1 through Year 5 of ownership</a>
+                    </h4>
+                </div>
+                <div id="oii1" class="panel-collapse collapse">
+                    <div class="panel-body">A BMP homeowner who decides to sell their home within this time period must sell to an eligible BMP-qualified, new buyer (a first-time buyer with an income not exceeding 120% of area median income) at a re-established restricted resale
+                        price. The principal amount of the City Loan is forgiven and a new principal amount of the City Loan is established for the new homeowner.</div>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#oii2">Year 6 through Year 20 of ownership</a>
+                    </h4>
+                </div>
+                <div id="oii2" class="panel-collapse collapse">
+                    <div class="panel-body">A BMP homeowner can resell their home to whomever they choose at the current, unrestricted fair-market price. The BMP homeowner will pay off the principal amount of the City Loan at the sale of the home. The BMP homeowner must also
+                        pay a share of the increase in equity in the home to the City.</div>
+                </div>
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#oii3">Year 21 and after of ownership</a>
+                    </h4>
+                </div>
+                <div id="oii3" class="panel-collapse collapse">
+                    <div class="panel-body">The BMP homeowner is required to pay back the principal of the City Loan and is able to realize all of the market-driven appreciation in the home above its Initial Market Value (IMV). Resale restrictions expire and the BMP homeowner
+                        is no longer required to pay the City a share in the increase in equity in the home.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
     </div>
 
+    <div class="footer-container">
+
+        <footer class="footer" id="fix-this" class="site-footer">
+
+            <span class="footer-left">
+            <a href="http://www.housingtrustsv.org">Home</a>
+            <a href="#">Contact</a>
+            <a href="#">Site Map</a> &#169; 2015 HOUSING TRUST SILICON VALLEY
+        </span>
+
+            <span class="footer-right">
+            <a href="https://www.facebook.com/HousingTrustSV"><img src="{{url_for('static', filename='images/fb.png') }}"></a>
+            <a href="https://twitter.com/search?q=housing%20trust%20sv&src=typd&lang=en"><img src="{{url_for('static', filename='images/twit.png') }}"></a>
+            <a href="https://www.linkedin.com/company/housing-trust-of-santa-clara-county?trk=fc_badge"><img src="{{url_for('static', filename='images/li.png') }}"></a>
+            <a href="https://www.youtube.com/user/HousingTrust2011?feature=mhee"><img src="{{url_for('static', filename='images/yt.png') }}"></a>
+        </span>
+
+        </footer>
+
+    </div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
-    
-    
+    <script src="{{url_for('static', filename='bootstrap/js/main.js') }}"></script>
+
+
     <script>
-    function submitStepTwoForm() {
-        $("#step2form").submit();
-    }
-        
+        function submitStepTwoForm() {
+            $("#step2form").submit();
+        }
     </script>
 </body>
 
