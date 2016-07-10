@@ -1,0 +1,41 @@
+body{
+    margin-left: 200px;
+    margin-right: 200px;
+    background-image: url("http://www.housingtrustsv.org/wp-content/uploads/2014/12/background4.jpg");
+    background-size: cover;
+}
+
+.navbar-default {
+    min-height: 40px;
+}
+
+.navbar-default .navbar-nav li a {
+    color: #1a3668;
+    text-transform: uppercase;
+    font-family: Roboto Slab;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 10px 10px 10px 10px;
+    line-height: 1.8;
+}
+
+.navbar-default .navbar-nav li a:hover {
+    color: white;
+    background-color: #1a3668;
+}
+
+.background-gray {
+    background-color: #D1D3D6;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+.panel-default .panel-heading {
+    border-bottom: solid #ddd 1px;
+}
+
+.panel-body {
+    border-bottom: 1px solid #ddd;
+}
